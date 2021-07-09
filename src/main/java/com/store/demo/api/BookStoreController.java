@@ -36,6 +36,7 @@ public class BookStoreController {
 	@PostMapping(path = { "/add" })
 	public String addBook(@RequestBody Book book) {
 
+		LOGGER.info("==addBook==");
 		String returnStr = "";
 		try {
 
@@ -56,6 +57,7 @@ public class BookStoreController {
 	@GetMapping(path = { "/get/{isbn}" })
 	public String getBook(@PathVariable("isbn") String isbn) {
 
+		LOGGER.info("==getBook==");
 		try {
 
 			return bookStoreService.getBook(isbn);
@@ -75,6 +77,7 @@ public class BookStoreController {
 	@DeleteMapping(path = { "/delete/{isbn}" })
 	public Boolean deleteBook(@PathVariable("isbn") String isbn) {
 
+		LOGGER.info("==deleteBook==");
 		Boolean result = null;
 		try {
 
@@ -94,6 +97,7 @@ public class BookStoreController {
 	@PutMapping(path = { "/update" })
 	public Book updateBook(@RequestBody Book book) {
 
+		LOGGER.info("==updateBook==");
 		Book updatedBook = null;
 		try {
 
@@ -115,6 +119,7 @@ public class BookStoreController {
 																								// MediaType.APPLICATION_JSON_VALUE
 	public String checkout(@RequestBody List<Book> books, @PathVariable("discount") String discountCode) {
 
+		LOGGER.info("==checkout==");
 		try {
 
 			return bookStoreService.checkoutBooks(books, discountCode);
@@ -132,6 +137,7 @@ public class BookStoreController {
 	@GetMapping(path = { "/getAll" }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Book> getAll() {
 
+		LOGGER.info("==getAll==");
 		try {
 
 			return bookStoreService.getAllBooks();
