@@ -3,6 +3,8 @@ package com.store.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +97,7 @@ public class BookStoreService {
 		return updatedBook;
 	}
 
-	public String checkoutBooks(List<Book> booksList,String discountCode) {
+	public String checkoutBooks(List<Book> booksList,String discountCode) throws JSONException {
 
 		List<Book> resultList = new ArrayList<Book>();
 		double totalAmount = 0;
@@ -121,8 +123,9 @@ public class BookStoreService {
 			LOGGER.error("Issue while checkout:" + e.getMessage(), e);
 		}
 		System.out.println("{totalPayableAmount :"+totalAmount+"}");
-
-		return "{totalPayableAmount :"+totalAmount+"}";
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("totalPayableAmount", totalAmount);
+		return jsonObj.toString();
 
 	}
 

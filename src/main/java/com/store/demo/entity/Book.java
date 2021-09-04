@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "book")
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
-public class Book implements Serializable{
-	
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
+public class Book implements Serializable {
+
 	public Book(String isbn, String name, String description, String author, String type, Double price) {
 		super();
 		this.isbn = isbn;
@@ -23,34 +23,33 @@ public class Book implements Serializable{
 		this.type = type;
 		this.price = price;
 	}
-	
-	
 
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	@Id
 	@Column(name = "isbn")
 	private String isbn;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "author")
 	private String author;
-	
+
 	@Column(name = "type")
 	private String type;
-	
+
 	@Column(name = "price")
 	private Double price;
+
+	@Column(name = "image")
+	private String image;
 
 	public String getIsbn() {
 		return isbn;
@@ -99,8 +98,13 @@ public class Book implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
-	
-	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 }

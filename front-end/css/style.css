@@ -1,0 +1,13 @@
+.logo{
+	padding-top:4px;
+}
+.price{
+	font-weight:bold;
+}
+.carrot{
+	background-color:#2ecc71
+}
+.empty-message{
+color:#acaaaa;
+text-align:center;
+}

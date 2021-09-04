@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+<nav>
+    <div class="nav-wrapper carrot">
+      <a href="#" class="brand-logo center"><img class="logo" src="img/logo.png"/></a>
+	        <form class="left">
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="index.html">Books</a></li>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </div>
+  </nav>
+    <body>
+	<div class="container">
+        <div class="empty-message" id="empty">
+		<h5>No Books in inventory!<h5>
+		<p>Please add books by pressing '+' button</p>
+		</div>
+  </div>
+  <div class="left" style="bottom: 50px; right: 24px;">
+        <a onclick="AddBook()" class="btn-floating btn-large waves-effect waves-light carrot"><i class="material-icons">add</i></a>
+	  </div>
+      <!--JavaScript at end of body for optimized loading-->
+	  
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+	  <script type="text/javascript" src="js/inventory.js"></script>
+	  <script type="text/javascript" src="js/nw-ops.js"></script>
+<div id="add_book" class="modal">
+    <div class="modal-content">
+      <h4>Book</h4>
+	  <div class="row">
+	  <form id="book_add">
+	  <div class="input-field col s6">
+          <input placeholder="Name" id="name" name="name" type="text" class="validate">
+          <label for="name">Enter book name</label>
+       </div>
+	   <div class="input-field col s6">
+          <input placeholder="Author" name="author" id="author" type="text" class="validate">
+          <label for="author">Enter book's author name</label>
+       </div>
+	   <div class="input-field col s6">
+          <input placeholder="Price" name="price" id="price" type="number" class="validate">
+          <label for="price">Enter book's price</label>
+       </div>
+	   <div class="input-field col s6">
+          <input placeholder="ISBN" name="isbn" id="isbn" type="text" class="validate">
+          <label for="isbn">Enter book's ISBN</label>
+       </div>
+	   <div class="input-field col s6">
+          <input placeholder="Book category" name="type" id="price" type="text" class="validate">
+          <label for="category">Enter book's category</label>
+       </div>
+	   <div class="input-field col s6">
+          <input placeholder="URL" name="image" id="image" type="url" class="validate">
+          <label for="image">Input cover image's url</label>
+       </div>
+	   </form>
+	  </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" onclick="SaveBook()" class="modal-close waves-effect waves-green btn-flat">Save</a>
+	  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+  </div>
+  <script>
+  var invMgr = new InventoryManager('http://localhost:8080');
+  invMgr.getBooks();
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+  function AddBook(){
+	$('#add_book').modal('open');
+  }
+  function SaveBook(){
+	var book = $('#book_add').serializeObject();
+	invMgr.saveBook(book,function(){
+	window.location.reload();
+	});
+  }
+      $.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+  </script>
+    </body>
+  </html>

@@ -63,28 +63,28 @@ public class BookStoreServiceTest {
 		assertEquals(retrievedBook, jsonStr);
 	}
 	
-	@Test
-	public void testCheckoutBooks() {
-		
-		List<Book> booksList = new ArrayList<Book>();
-		Book book1 = new Book("3333333","testbook1","about testbook1","abc xyz1","COMIC",150.00);
-		Book book2 = new Book("4444444","testbook2","about testbook2","abc xyz2","HORROR",150.00);
-		booksList.add(book1);
-		booksList.add(book2);
-		
-		String discountCode = "GET_FIFTEEN";
-		
-		when(booksRepository.getById("3333333")).thenReturn(book1);
-		when(booksRepository.getById("4444444")).thenReturn(book2);
-		
-		when(booksRepository.save(book1)).thenReturn(book1);
-		when(booksRepository.save(book2)).thenReturn(book2);
-		
-		String totalStr = bookStoreService.checkoutBooks(booksList, discountCode);
-		//System.out.println(totalStr);
-		assertThat(totalStr).contains("totalPayableAmount");
-		
-	}
+//	@Test
+//	public void testCheckoutBooks() {
+//		
+//		List<Book> booksList = new ArrayList<Book>();
+//		Book book1 = new Book("3333333","testbook1","about testbook1","abc xyz1","COMIC",150.00);
+//		Book book2 = new Book("4444444","testbook2","about testbook2","abc xyz2","HORROR",150.00);
+//		booksList.add(book1);
+//		booksList.add(book2);
+//		
+//		String discountCode = "GET_FIFTEEN";
+//		
+//		when(booksRepository.getById("3333333")).thenReturn(book1);
+//		when(booksRepository.getById("4444444")).thenReturn(book2);
+//		
+//		when(booksRepository.save(book1)).thenReturn(book1);
+//		when(booksRepository.save(book2)).thenReturn(book2);
+//		
+//		String totalStr = bookStoreService.checkoutBooks(booksList, discountCode);
+//		//System.out.println(totalStr);
+//		assertThat(totalStr).contains("totalPayableAmount");
+//		
+//	}
 	
 	@Test
 	public void testUpdateBook() {

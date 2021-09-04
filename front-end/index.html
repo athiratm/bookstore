@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+<nav>
+    <div class="nav-wrapper carrot">
+      <a href="#" class="brand-logo center"><img class="logo" src="img/logo.png"/></a>
+	        <form class="left">
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="index.html">Books</a></li>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </div>
+  </nav>
+    <body>
+	<div class="container">
+        
+      </div>
+	  
+      <!--JavaScript at end of body for optimized loading-->
+	  <script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  ></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+	  <script type="text/javascript" src="js/books.js"></script>
+	  <script type="text/javascript" src="js/nw-ops.js"></script>
+	  <script>
+	  var books = new BooksManager('http://localhost:8080');
+	  books.getBooks();
+	  
+	  
+	  function addToCart(evt){
+	  var cartJson = localStorage.getItem('cart');
+	  var cart =[];
+	  if(cartJson){
+		cart = JSON.parse(cartJson);
+		}
+		var cart_item = {};
+		var name = $('#'+evt).find('.bookName').text();
+		cart_item.name=name;
+		cart_item.price = parseInt($('#'+evt).find('.price').text().replace(' AED',''));
+		cart_item.type ='generic';
+		cart_item.image =$('#'+evt).find('img').attr('src');
+		cart_item.description = $('#'+evt).find('.desc').text();
+		cart_item.isbn = $('#'+evt).find('.isbnNum').text();
+		cart_item.author = $('#'+evt).find('.authorName').text(); 
+		cart.push(cart_item)
+		localStorage.setItem('cart', JSON.stringify(cart));
+		M.toast({html: name+' added to cart!', classes: 'rounded'});
+	  }
+	  </script>
+    </body>
+  </html>
